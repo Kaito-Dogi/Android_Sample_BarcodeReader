@@ -33,14 +33,13 @@ class MainActivity : AppCompatActivity() {
             runBlocking(Dispatchers.IO) {
                 runCatching {
                     //bookService.getBook(isbnEditText.text.toString())
-                    bookService.getBook("8rAPAAAAYAAJ")
+                    bookService.getBook(isbnEditText.text.toString())
                 }
             }.onSuccess {
                 //bookImageView.load(it.avatarUrl)
                 titleTextView.text = it.volumeInfo.title
-                authorTextView.text = it.id
-                //authorTextView.text = it.author
-                //descriptionTextView.text = it.content
+                authorTextView.text = it.volumeInfo.authors[0]
+                descriptionTextView.text = it.volumeInfo.content
                 Toast.makeText(applicationContext, "成功", Toast.LENGTH_SHORT).show()
             }.onFailure {
                 Toast.makeText(applicationContext, "失敗", Toast.LENGTH_SHORT).show()

@@ -59,7 +59,8 @@
         android:ems="10"
         android:gravity="bottom"
         android:hint="user ID"
-        android:inputType="textVisiblePassword" />
+        android:inputType="textVisiblePassword"
+        android:text="8rAPAAAAYAAJ" />
 
     <Button
         android:id="@+id/requestButton"
