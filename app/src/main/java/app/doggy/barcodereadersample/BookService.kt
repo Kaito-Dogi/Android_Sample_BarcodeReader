@@ -5,7 +5,10 @@ import retrofit2.http.Path
 
 interface BookService {
 
-    @GET("books/v1/volumes/{volumeId}")
-    suspend fun getBook(@Path("volumeId") volumeId: String): Book
+    //@GET("volumes/{volumeId}")
+    //suspend fun getBook(@Path("volumeId") volumeId: String): Book
+
+    @GET("volumes?q=isbn:{isbn}")
+    suspend fun getBook(@Path("isbn") isbn: String): Book
 
 }
