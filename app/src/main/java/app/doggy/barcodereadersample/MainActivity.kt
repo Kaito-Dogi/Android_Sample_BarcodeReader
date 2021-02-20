@@ -20,8 +20,7 @@ class MainActivity : AppCompatActivity() {
 
         //RetrofitとGSONを組み合わせて通信の準備をする。
         val gson: Gson =
-            //GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create()
-            GsonBuilder().create()
+            GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create()
         val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl("https://www.googleapis.com/books/v1/")
             .addConverterFactory(GsonConverterFactory.create(gson))
@@ -33,20 +32,21 @@ class MainActivity : AppCompatActivity() {
             //runBlocking内
             runBlocking(Dispatchers.IO) {
                 runCatching {
-                    //bookService.getBook(isbnEditText.text.toString())
-                    bookService.getBook("9784000801010")
-                    //bookService.getBook("8rAPAAAAYAAJ")
+                    bookService.getBook("isbn:" + isbnEditText.text.toString())
                 }
             }.onSuccess {
                 //bookImageView.load(it.avatarUrl)
-                titleTextView.text = it.totalItems.toString()
-//                titleTextView.text = it.volumeInfo.title
-//                authorTextView.text = it.volumeInfo.authors[0]
-//                descriptionTextView.text = it.volumeInfo.content
+                titleTextView.text = it.items[0].volumeInfo.title
+                authorTextView.text = it.items[0].volumeInfo.authors[0]
+                descriptionTextView.text = it.items[0].volumeInfo.content
                 Toast.makeText(applicationContext, "成功", Toast.LENGTH_SHORT).show()
             }.onFailure {
                 Toast.makeText(applicationContext, "失敗", Toast.LENGTH_SHORT).show()
             }
+
+        }
+
+        floatingActionButton.setOnClickListener {
 
         }
     }

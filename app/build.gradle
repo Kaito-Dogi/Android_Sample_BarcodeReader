@@ -59,4 +59,7 @@ dependencies {
 
     //Coil
     implementation 'io.coil-kt:coil:0.10.1'
+
+    implementation 'com.google.firebase:firebase-ml-vision:24.0.3'
+    implementation 'com.google.firebase:firebase-ml-vision-barcode-model:16.0.1'
 }
